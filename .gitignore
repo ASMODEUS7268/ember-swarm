@@ -1,6 +1,3 @@
-# Build output (zip for itch.io is made by build.ps1)
-dist/
-
 # OS junk
 Thumbs.db
 desktop.ini
