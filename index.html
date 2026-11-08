@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ember Swarm</title>
+  <meta name="description" content="Аркадный roguelite на выживание: продержись 10 минут против роя.">
+  <meta name="theme-color" content="#07060f">
+  <meta property="og:title" content="Ember Swarm">
+  <meta property="og:description" content="Аркадный roguelite на выживание в браузере. Продержись 10 минут против роя.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307060f'/%3E%3Cpath d='M16 4 L26 16 L16 28 L6 16 Z' fill='none' stroke='%23ff8a3d' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%237ff6ff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <div id="menu" class="overlay">
+    <div class="panel title-panel">
+      <h1 class="logo">EMBER<span>SWARM</span></h1>
+      <p class="tagline">Продержись 10 минут против бесконечного роя.<br>Собирай опыт, выбирай улучшения, побеждай боссов.</p>
+      <button id="btn-start" class="btn primary">Играть <kbd>Enter</kbd></button>
+      <div id="best" class="best"></div>
+      <div class="controls">
+        <div><kbd>WASD</kbd> / <kbd>←↑↓→</kbd> движение</div>
+        <div><kbd>Пробел</kbd> / <kbd>Shift</kbd> рывок (неуязвимость)</div>
+        <div><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> выбор улучшения</div>
+        <div><kbd>Esc</kbd> пауза · <kbd>M</kbd> звук</div>
+      </div>
+      <p class="muted small">Стрельба автоматическая — твоя задача двигаться и выживать.</p>
+    </div>
+  </div>
+
+  <div id="levelup" class="overlay hidden">
+    <h2 id="levelup-title">Новый уровень!</h2>
+    <p class="muted">Выбери улучшение: клик или клавиши 1 · 2 · 3</p>
+    <div id="cards" class="cards"></div>
+  </div>
+
+  <div id="pause" class="overlay hidden">
+    <div class="panel">
+      <h2>Пауза</h2>
+      <p class="muted">Твоя сборка</p>
+      <div id="pause-build" class="build"></div>
+      <div class="row">
+        <button id="btn-resume" class="btn primary">Продолжить <kbd>Esc</kbd></button>
+        <button id="btn-restart" class="btn">Заново</button>
+        <button id="btn-menu" class="btn">В меню</button>
+      </div>
+      <button id="btn-sound" class="btn ghost">🔊 Звук вкл (M)</button>
+    </div>
+  </div>
+
+  <div id="gameover" class="overlay hidden">
+    <div class="panel">
+      <h2 id="go-title"></h2>
+      <p id="go-sub" class="muted"></p>
+      <div id="go-stats" class="stats"></div>
+      <div id="go-build" class="build"></div>
+      <div class="row">
+        <button id="btn-again" class="btn primary">Ещё раз <kbd>Enter</kbd></button>
+        <button id="btn-menu2" class="btn">В меню</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plain scripts (no modules) so the game also runs by double-clicking index.html. -->
+  <script src="src/config.js"></script>
+  <script src="src/utils.js"></script>
+  <script src="src/input.js"></script>
+  <script src="src/audio.js"></script>
+  <script src="src/sprites.js"></script>
+  <script src="src/fx.js"></script>
+  <script src="src/entities.js"></script>
+  <script src="src/upgrades.js"></script>
+  <script src="src/director.js"></script>
+  <script src="src/hud.js"></script>
+  <script src="src/ui.js"></script>
+  <script src="src/game.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>

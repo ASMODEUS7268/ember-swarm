@@ -1,0 +1,178 @@
+:root {
+  --bg: #07060f;
+  --panel: rgba(16, 14, 34, 0.92);
+  --line: rgba(127, 246, 255, 0.22);
+  --text: #e8f6ff;
+  --muted: rgba(232, 246, 255, 0.6);
+  --cyan: #7ff6ff;
+  --ember: #ff8a3d;
+  --pink: #ff4f7b;
+  --gold: #ffd166;
+  --violet: #a77dff;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Rubik, system-ui, sans-serif;
+  user-select: none;
+}
+
+canvas { display: block; width: 100vw; height: 100vh; }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(5, 4, 12, 0.7);
+  backdrop-filter: blur(4px);
+  animation: fade 0.2s ease-out;
+}
+#menu { background: radial-gradient(ellipse at center, rgba(7, 6, 15, 0.4), rgba(7, 6, 15, 0.92)); }
+.hidden { display: none; }
+
+.panel {
+  width: min(560px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  padding: 28px 32px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: 0 0 60px rgba(127, 246, 255, 0.08), inset 0 0 40px rgba(167, 125, 255, 0.05);
+  text-align: center;
+  animation: pop 0.25s ease-out;
+}
+.title-panel { background: transparent; border: none; box-shadow: none; }
+
+h2 { margin: 0 0 6px; font: 400 36px "Russo One", sans-serif; letter-spacing: 1px; }
+h2.win { color: var(--gold); text-shadow: 0 0 24px rgba(255, 209, 102, 0.6); }
+h2.lose { color: var(--pink); text-shadow: 0 0 24px rgba(255, 79, 123, 0.5); }
+
+.logo {
+  margin: 0;
+  font: 400 clamp(48px, 10vw, 88px)/0.95 "Russo One", sans-serif;
+  letter-spacing: 4px;
+  color: var(--ember);
+  text-shadow: 0 0 30px rgba(255, 138, 61, 0.7), 0 0 80px rgba(255, 79, 123, 0.4);
+}
+.logo span { display: block; color: var(--cyan); text-shadow: 0 0 30px rgba(127, 246, 255, 0.7); }
+.tagline { margin: 20px 0 26px; line-height: 1.5; color: var(--text); }
+
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font: 600 16px Rubik, sans-serif;
+  cursor: pointer;
+  transition: transform 0.12s, background 0.12s, box-shadow 0.12s;
+}
+.btn:hover { transform: translateY(-2px); background: rgba(127, 246, 255, 0.1); }
+.btn.primary {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--ember), var(--pink));
+  color: #fff;
+  font-size: 18px;
+  box-shadow: 0 0 30px rgba(255, 79, 123, 0.4);
+}
+.btn.primary:hover { box-shadow: 0 0 44px rgba(255, 79, 123, 0.6); }
+.btn.ghost { margin-top: 14px; border: none; background: none; color: var(--muted); font-size: 14px; }
+
+kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 2px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom-width: 3px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  font: 600 12px Rubik, sans-serif;
+  color: var(--text);
+}
+.btn.primary kbd { border-color: rgba(255, 255, 255, 0.5); background: rgba(0, 0, 0, 0.15); }
+
+.best { margin: 18px 0; color: var(--muted); }
+.best b { color: var(--gold); }
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px 26px;
+  justify-content: center;
+  margin: 10px 0 14px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: left;
+}
+
+.row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px; }
+
+/* Level-up cards */
+#levelup h2 { color: var(--violet); text-shadow: 0 0 24px rgba(167, 125, 255, 0.6); }
+.cards { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-top: 14px; }
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 220px;
+  min-height: 250px;
+  padding: 26px 18px 20px;
+  border: 1px solid rgba(167, 125, 255, 0.35);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(40, 30, 80, 0.95), rgba(16, 14, 34, 0.95));
+  color: var(--text);
+  font-family: Rubik, sans-serif;
+  cursor: pointer;
+  animation: rise 0.3s ease-out backwards;
+  transition: transform 0.14s, border-color 0.14s, box-shadow 0.14s;
+}
+.card:hover { transform: translateY(-6px); border-color: var(--violet); box-shadow: 0 10px 40px rgba(167, 125, 255, 0.35); }
+.card-weapon { border-color: rgba(255, 209, 102, 0.5); }
+.card-weapon:hover { border-color: var(--gold); box-shadow: 0 10px 40px rgba(255, 209, 102, 0.3); }
+.card-key { position: absolute; top: 10px; left: 12px; font: 600 12px Rubik; color: var(--muted); }
+.card-icon { font-size: 46px; line-height: 1.2; filter: drop-shadow(0 0 12px rgba(167, 125, 255, 0.6)); }
+.card-name { font: 400 19px "Russo One", sans-serif; }
+.card-tag { padding: 2px 10px; border-radius: 99px; background: rgba(167, 125, 255, 0.2); font-size: 12px; color: var(--violet); }
+.card-weapon .card-tag { background: rgba(255, 209, 102, 0.15); color: var(--gold); }
+.card-desc { font-size: 14px; line-height: 1.4; color: var(--muted); }
+
+/* Build chips and stats */
+.build { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+.chip { padding: 6px 10px; border: 1px solid var(--line); border-radius: 99px; background: rgba(255, 255, 255, 0.04); font-size: 13px; }
+.chip b { color: var(--cyan); }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+.stat { padding: 12px 8px; border-radius: 12px; background: rgba(255, 255, 255, 0.04); }
+.stat span { display: block; font-size: 12px; color: var(--muted); }
+.stat b { font: 400 22px "Russo One", sans-serif; }
+.stat em { display: block; font: 600 11px Rubik; font-style: normal; color: var(--gold); }
+
+@keyframes fade { from { opacity: 0; } }
+@keyframes pop { from { opacity: 0; transform: scale(0.95); } }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+
+@media (max-width: 720px) {
+  .controls { grid-template-columns: 1fr; }
+  .card { width: 100%; min-height: 0; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
