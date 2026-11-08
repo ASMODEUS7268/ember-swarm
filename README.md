@@ -4,9 +4,9 @@
 
 Написано на чистом JavaScript и Canvas 2D, **без движка и без зависимостей**. Вся графика рисуется кодом, все звуки синтезируются через WebAudio. В игре нет ни одного файла с картинками или звуком.
 
-<!-- После публикации вставь сюда ссылки:
-**[▶ Играть в браузере](https://ИМЯ.github.io/ember-swarm/)** · [itch.io](https://ИМЯ.itch.io/ember-swarm)
--->
+### **[▶ Играть в браузере](https://asmodeus7268.github.io/ember-swarm/)**
+
+<!-- Когда выложишь на itch.io, добавь: · [itch.io](https://asmodeus7268.itch.io/ember-swarm) -->
 
 ![Бой в середине забега](docs/gameplay.png)
 
